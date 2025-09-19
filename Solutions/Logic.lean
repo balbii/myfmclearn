@@ -87,8 +87,14 @@ theorem peirce_law_weak :
 
 theorem impl_linear :
     (P → Q) ∨ (Q → P)  := by
-  sorry
-
+  by_cases hp : P -- P ou ~P
+  right
+  intro hq
+  exact hp
+  left
+  intro p
+  have hf : False := hp p
+  contradiction
 
 ------------------------------------------------
 -- Interdefinability of ∨,∧
@@ -172,8 +178,8 @@ theorem uncurry_prop :
 
 theorem impl_refl :
     P → P  := by
-  sorry
-
+  intro h
+  exact h
 
 ------------------------------------------------
 -- Weakening and contraction
@@ -181,7 +187,9 @@ theorem impl_refl :
 
 theorem weaken_disj_right :
     P → (P ∨ Q)  := by
-  sorry
+  intro h
+  left
+  exact h
 
 theorem weaken_disj_left :
     Q → (P ∨ Q)  := by
