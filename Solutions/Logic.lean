@@ -2,7 +2,6 @@ section propositional
 
 variable (P Q R : Prop)
 
-
 ------------------------------------------------
 -- Double negation
 ------------------------------------------------
@@ -30,8 +29,12 @@ theorem disj_comm :
 
 theorem conj_comm :
     (P ∧ Q) → (Q ∧ P)  := by
-  sorry
-
+  intro hpeq
+  rcases hpeq with ⟨hp, hq⟩
+  -- exact ⟨hq, hp⟩ // isso funciona
+  constructor
+  exact hq
+  exact hp
 
 ------------------------------------------------
 -- Interdefinability of →,∨
@@ -115,7 +118,11 @@ theorem conj_as_negdisj :
 
 theorem demorgan_disj :
     ¬ (P ∨ Q) → (¬ P ∧ ¬ Q)  := by
+  intro hnpouq
+  constructor
+  
   sorry
+
 
 theorem demorgan_disj_converse :
     (¬ P ∧ ¬ Q) → ¬ (P ∨ Q)  := by
